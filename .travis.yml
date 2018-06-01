@@ -9,11 +9,6 @@ cache:
     - $HOME/.gradle/wrapper/
 env:
   - NODE_ENV='test'
-script:
-  - cp env.example.js env.js
-  - npm run lint
-  - npm test
-  - npm run bundle:ios
 matrix:
   include:
     - language: android
@@ -46,7 +41,6 @@ matrix:
           - extra-google-m2repository
           - addon-google_apis-google-16
       script:
-        - npm run lint
         - npm test
         - cd android && ./gradlew assembleDebug && ./gradlew assembleRelease
     - language: objective-c
@@ -64,8 +58,6 @@ matrix:
       xcode_project: ios/rnapp.xcodeproj
       xcode_scheme: ios/rnappTests
       script:
-        - npm run lint
         - npm test
         - cd ios
         - xcodebuild -scheme rnapp -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
-        - travis_retry xctool run-tests -scheme rnapp -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
