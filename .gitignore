@@ -5,6 +5,7 @@
 
 # dependencies
 /node_modules
+package-lock.json
 
 # misc
 .env.local
@@ -26,3 +27,8 @@ yarn-error.log*
 android/.gradle/
 android/app/build/
 android/build/
+
+#ios
+ios/.DS_Store
+ios/rnapp.xcodeproj/project.xcworkspace/
+ios/rnapp.xcodeproj/xcuserdata/

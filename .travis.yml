@@ -46,13 +46,15 @@ matrix:
           - extra-google-m2repository
           - addon-google_apis-google-16
       script:
+        - npm run lint
+        - npm test
         - cd android && ./gradlew assembleDebug && ./gradlew assembleRelease
     - language: objective-c
       os: osx
       osx_image: xcode8.2
       node_js: false
       before_install:
-        - nvm install 7
+        - nvm install 8
         - node --version
         - travis_retry npm install -g yarn
         - yarn -version
@@ -62,6 +64,8 @@ matrix:
       xcode_project: ios/rnapp.xcodeproj
       xcode_scheme: ios/rnappTests
       script:
+        - npm run lint
+        - npm test
         - cd ios
         - xcodebuild -scheme rnapp -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
         - travis_retry xctool run-tests -scheme rnapp -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
