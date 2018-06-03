@@ -17,7 +17,9 @@ class Dog extends React.Component<any, any> {
     return (
       <View style={styles.container}>
         <Text>Loading your new dog image!</Text>
-        <Image
+        this.props.dogError
+        ? <Text> error loading dog image</Text>
+        : <Image
           style={styles.image}
           source={{uri: this.props.dogUrl || 'https://images.dog.ceo/breeds/mountain-bernese/n02107683_5699.jpg'}}
         />
@@ -26,8 +28,15 @@ class Dog extends React.Component<any, any> {
   }
 }
 
+const mapStateToProps = (state : any) => {
+  return {
+    dogUrl: state.dogUrl,
+    dogError: state.requestError
+  }
+}
+
 export default connect(
-    null,
+    mapStateToProps,
     {fetchDogUrl}
 )(Dog)
 

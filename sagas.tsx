@@ -1,8 +1,18 @@
-import {takeLatest, put} from "redux-saga/effects";
+import { takeLatest, put } from "redux-saga/effects";
 
 function* fetchDog() {
   console.log('fetching dog');
-  yield put({type: "DOG_FETCH_SUCCESS", dogUrl: 'foo'})
+  try {
+    const response = yield fetch('https://dog.ceo/api/breeds/image/random');
+    const data = response.json();
+    if (data.success) {
+      yield put({type: 'DOG_FETCH_REQUEST_SUCCESS', payload: data.message})
+    } else {
+      yield put({type: 'DOG_FETCH_REQUEST_ERROR'})
+    }
+  } catch (e) {
+    yield put({type: 'DOG_FETCH_REQUEST_ERROR'})
+  }
 }
 
 function* fetchDogSaga() {
