@@ -3,12 +3,7 @@ let initialState = {
   'requestError': false
 };
 
-interface Action {
-  type: string,
-  payload: any
-}
-
-export default function dogApp(state=initialState, action: Action) {
+export default function dogApp(state=initialState, action: any) {
   switch(action.type) {
     case 'DOG_FETCH_REQUEST':
       return {...state, dogUrl: '', requestError: false};

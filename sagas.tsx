@@ -1,11 +1,10 @@
 import { takeLatest, put } from "redux-saga/effects";
 
 function* fetchDog() {
-  console.log('fetching dog');
   try {
     const response = yield fetch('https://dog.ceo/api/breeds/image/random');
-    const data = response.json();
-    if (data.success) {
+    const data = JSON.parse(response._bodyText);  // TODO: this feels wrong
+    if (data.status === 'success') {
       yield put({type: 'DOG_FETCH_REQUEST_SUCCESS', payload: data.message})
     } else {
       yield put({type: 'DOG_FETCH_REQUEST_ERROR'})
