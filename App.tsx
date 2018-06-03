@@ -1,11 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga'
+import dogSaga from './sagas'
 import dogStore from './reducer'
 import Dog from "./Dog.js";
 
-const store = createStore(dogStore);
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(
+  dogStore,
+  applyMiddleware(sagaMiddleware)
+);
+
+sagaMiddleware.run(dogSaga);
 
 
 export default class App extends React.Component {
