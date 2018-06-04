@@ -1,5 +1,13 @@
 import React from "react";
-import { StyleSheet, View, Picker, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Picker,
+  Text,
+  ActionSheetIOS,
+  Platform,
+  Button
+} from "react-native";
 
 var options = [
   "Pitty",
@@ -16,27 +24,42 @@ class HeaderComponent extends React.Component<any, any> {
   }
 
   handleValueChange = (newBreed: any) => {
-    this.props.onBreedChange(newBreed)
+    this.props.onBreedChange(newBreed);
   };
 
   get availableOptions() {
-    return this.props.breeds.length > 0 ? this.props.breeds : options
+    return this.props.breeds.length > 0 ? this.props.breeds : options;
   }
+
+  showActionSheet = () => {
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: this.availableOptions
+      },
+      buttonIndex => this.handleValueChange(this.availableOptions[buttonIndex])
+    );
+  };
 
   render() {
     return (
       <View style={styles.container}>
         <Text>Selected Breed:</Text>
-        <Picker
-          selectedValue={this.props.selectedBreed}
-          mode={"dropdown"}
-          onValueChange={this.handleValueChange}
-          style={styles.picker}
-        >
-          {this.availableOptions.map((option: any, index) => {
-            return <Picker.Item label={option} value={option} key={index} />;
-          })}
-        </Picker>
+        {Platform.OS === 'ios' ? (
+          <Button
+            onPress={this.showActionSheet}
+            title={this.props.selectedBreed}
+          />
+        ) : (
+          <Picker
+            selectedValue={this.props.selectedBreed}
+            onValueChange={this.handleValueChange}
+            style={styles.picker}
+          >
+            {this.availableOptions.map((option: any, index: number) => {
+              return <Picker.Item label={option} value={option} key={index} />;
+            })}
+          </Picker>
+        )}
       </View>
     );
   }

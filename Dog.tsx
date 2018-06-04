@@ -84,8 +84,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#fff",
-    minHeight: "100%",
-    minWidth: "100%",
+    height: "100%",
+    width: "100%",
     marginTop: Platform.OS === "ios" ? 20 : 0
   },
   mainContainer: {
