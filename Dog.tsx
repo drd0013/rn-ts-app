@@ -4,10 +4,10 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
-  TouchableHighlight
+  Image
 } from "react-native";
 import { fetchDogUrl } from "./actions";
+import Footer from './Footer';
 
 class Dog extends React.Component<any, any> {
   constructor(props: any) {
@@ -36,9 +36,6 @@ class Dog extends React.Component<any, any> {
                 "https://images.dog.ceo/breeds/mountain-bernese/n02107683_5699.jpg"
             }}
           />
-          <TouchableHighlight onPress={this.props.fetchDogUrl}>
-            <Text>New Image</Text>
-          </TouchableHighlight>
         </View>
       );
     }
@@ -47,9 +44,12 @@ class Dog extends React.Component<any, any> {
   render() {
     return (
       <View style={styles.container}>
-        {this.props.dogError || this.props.dogUrl
-          ? this.renderLoadedState()
-          : this.renderLoadingMessage()}
+        <View style={styles.mainContainer}>
+          {this.props.dogError || this.props.dogUrl
+            ? this.renderLoadedState()
+            : this.renderLoadingMessage()}
+        </View>
+        <Footer nextDoggo={this.props.fetchDogUrl} />
       </View>
     );
   }
@@ -68,13 +68,18 @@ export default connect(mapStateToProps, { fetchDogUrl })(Dog);
 
 const styles = StyleSheet.create({
   image: {
-    height: 400,
-    width: 300
+    height: '100%',
+    width: 300,
   },
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    minHeight: '100%',
     alignItems: "center",
     justifyContent: "center"
+  },
+  mainContainer: {
+    flexGrow: 1,
+    flex: 1,
   }
 });
