@@ -16,7 +16,7 @@ class HeaderComponent extends React.Component<any, any> {
   }
 
   handleValueChange = (newBreed: any) => {
-    console.log('new breed', newBreed)
+    this.props.onBreedChange(newBreed)
   };
 
   get availableOptions() {

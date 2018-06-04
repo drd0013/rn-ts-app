@@ -15,6 +15,8 @@ export default function dogApp(state = initialState, action: any) {
       return { ...state, requestError: true };
     case "BREED_FETCH_REQUEST_SUCCESS":
       return { ...state, availableBreeds: action.payload };
+    case "SET_SELECTED_BREED":
+      return { ...state, selectedBreed: action.payload };
     default:
       return state;
   }

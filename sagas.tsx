@@ -1,8 +1,22 @@
-import { takeLatest, put, yield, fork } from "redux-saga/effects";
+import { takeLatest, put, yield, fork, select } from "redux-saga/effects";
 
-function* fetchDog() {
+const getSelectedBreed = (state: any) => state.selectedBreed
+
+
+function* fetchDog(action) {
+  let url, selectedBreed;
+  if (action.payload) {
+    selectedBreed = action.payload
+  } else {
+    selectedBreed = yield select(getSelectedBreed);
+  }
   try {
-    const response = yield fetch("https://dog.ceo/api/breeds/image/random");
+    if (selectedBreed === 'all') {
+      url = "https://dog.ceo/api/breeds/image/random";
+    } else {
+      url = `https://dog.ceo/api/breed/${selectedBreed}/images/random`;
+    }
+    const response = yield fetch(url);
     const data = JSON.parse(response._bodyText); // TODO: this feels wrong
     if (data.status === "success") {
       yield put({ type: "DOG_FETCH_REQUEST_SUCCESS", payload: data.message });
@@ -19,11 +33,8 @@ function* fetchBreeds() {
     const response = yield fetch("https://dog.ceo/api/breeds/list/all");
     const data = JSON.parse(response._bodyText); // TODO: this feels wrong
     if (data.status === "success") {
-      console.log('success!', data)
-
       yield put({ type: "BREED_FETCH_REQUEST_SUCCESS", payload: Object.keys(data.message).concat(['all']).sort() });
     } else {
-      console.log('error', data)
       yield put({ type: "BREED_FETCH_REQUEST_ERROR" });
     }
   } catch (e) {
@@ -32,7 +43,7 @@ function* fetchBreeds() {
 }
 
 function* fetchDogSaga() {
-  yield takeLatest("DOG_FETCH_REQUEST", fetchDog);
+  const action = yield takeLatest(["DOG_FETCH_REQUEST", "SET_SELECTED_BREED"], fetchDog);
 }
 
 function* fetchAvailableBreeds() {

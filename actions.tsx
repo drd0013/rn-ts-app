@@ -9,3 +9,10 @@ export function fetchAvailableBreeds() {
     type: "BREED_FETCH_REQUEST"
   };
 }
+
+export function setSelectedBreed(newBreed: string) {
+  return {
+    type: "SET_SELECTED_BREED",
+    payload: newBreed
+  }
+}
