@@ -22,10 +22,10 @@ const FooterComponent = (props: any) => {
   };
   return (
     <View style={styles.footerContainer}>
-      <TouchableOpacity onPress={shareUrl}>
+      <TouchableOpacity onPress={shareUrl} hitSlop={{top: 12, bottom: 12, right: 12, left: 12}}>
         <Text style={styles.share}>Share this cute image!</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={props.nextDoggo} activeOpacity={0.2}>
+      <TouchableOpacity onPress={props.nextDoggo} activeOpacity={0.6} hitSlop={{top: 12, bottom: 12, right: 12, left: 12}}>
         <Text style={styles.next}>Next Picture ></Text>
       </TouchableOpacity>
     </View>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   next: {
-    color: "#a51"
+    color: "#a51",
   },
   share: {
     color: '#19a'
