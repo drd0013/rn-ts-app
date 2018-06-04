@@ -43,7 +43,10 @@
       "\\.snap$",
       "<rootDir>/node_modules/"
     ],
-    "cacheDirectory": ".jest/cache"
+    "cacheDirectory": ".jest/cache",
+    "globals": {
+      "window": true
+    }
   },
   "dependencies": {
     "react": "16.3.1",
