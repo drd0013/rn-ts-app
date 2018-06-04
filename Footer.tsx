@@ -8,7 +8,7 @@ import {
   Platform, processColor
 } from "react-native";
 
-const FooterComponent = function(props: any) {
+const FooterComponent = (props: any) => {
   const shareUrl = () => {
     let shareProps = {
       title: "Check out this cute doggo!",

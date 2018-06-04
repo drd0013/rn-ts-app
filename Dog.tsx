@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {StyleSheet, Text, View, Image, Platform, Dimensions} from "react-native";
 import { fetchDogUrl } from "./actions";
 import Footer from "./Footer";
+import HeaderComponent from "./Header";
 
 class Dog extends React.Component<any, any> {
   constructor(props: any) {
@@ -39,6 +40,7 @@ class Dog extends React.Component<any, any> {
   render() {
     return (
       <View style={styles.container}>
+        <HeaderComponent />
         <View style={styles.mainContainer}>
           {this.props.dogError || this.props.dogUrl
             ? this.renderLoadedState()
