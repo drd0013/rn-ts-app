@@ -1,5 +1,5 @@
-export function fetchDogUrl () {
+export function fetchDogUrl() {
   return {
-    type: 'DOG_FETCH_REQUEST'
-  }
+    type: "DOG_FETCH_REQUEST"
+  };
 }
