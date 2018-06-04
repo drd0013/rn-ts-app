@@ -1,8 +1,7 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Provider } from "react-redux";
 import configureStore from "./store";
-import Dog from "./Dog.js";
+import Dog from "./Dog";
 
 const store = configureStore();
 

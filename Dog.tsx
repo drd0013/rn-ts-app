@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image, Platform
 } from "react-native";
 import { fetchDogUrl } from "./actions";
 import Footer from './Footer';
@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     minHeight: '100%',
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: Platform.OS === 'ios' ? 20 : 0,
   },
   mainContainer: {
     flexGrow: 1,
