@@ -5,7 +5,7 @@ import {
   Text,
   StyleSheet,
   Share,
-  Platform
+  Platform, processColor
 } from "react-native";
 
 const FooterComponent = function(props: any) {
@@ -23,7 +23,7 @@ const FooterComponent = function(props: any) {
   return (
     <View style={styles.footerContainer}>
       <TouchableOpacity onPress={shareUrl}>
-        <Text>Share this cute image!</Text>
+        <Text style={styles.share}>Share this cute image!</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={props.nextDoggo} activeOpacity={0.2}>
         <Text style={styles.next}>Next Picture ></Text>
@@ -36,12 +36,17 @@ export default FooterComponent;
 
 const styles = StyleSheet.create({
   footerContainer: {
-    height: 20,
+    paddingHorizontal: 12,
+    height: 30,
+    justifyContent: "space-between",
+    alignItems: "center",
     flexShrink: 0,
-    justifyContent: 'flex-end',
-    flex: 1
+    flexDirection: "row",
   },
   next: {
     color: "#a51"
+  },
+  share: {
+    color: '#19a'
   }
 });

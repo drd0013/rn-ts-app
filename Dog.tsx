@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Text, View, Image, Platform } from "react-native";
+import {StyleSheet, Text, View, Image, Platform, Dimensions} from "react-native";
 import { fetchDogUrl } from "./actions";
 import Footer from "./Footer";
 
@@ -22,7 +22,7 @@ class Dog extends React.Component<any, any> {
       return <Text> error loading dog image</Text>;
     } else if (this.props.dogUrl) {
       return (
-        <View>
+        <View style={styles.mainContainer}>
           <Image
             style={styles.image}
             source={{
@@ -64,18 +64,20 @@ export default connect(mapStateToProps, { fetchDogUrl })(Dog);
 const styles = StyleSheet.create({
   image: {
     height: "100%",
-    width: 300
+    width: Dimensions.get('window').width - 24,
+    resizeMode: "contain"
   },
   container: {
     flex: 1,
+    flexDirection: "column",
     backgroundColor: "#fff",
     minHeight: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    minWidth: "100%",
     marginTop: Platform.OS === "ios" ? 20 : 0
   },
   mainContainer: {
-    flexGrow: 1,
-    flex: 1
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   }
 });
