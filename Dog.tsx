@@ -1,13 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image, Platform
-} from "react-native";
+import { StyleSheet, Text, View, Image, Platform } from "react-native";
 import { fetchDogUrl } from "./actions";
-import Footer from './Footer';
+import Footer from "./Footer";
 
 class Dog extends React.Component<any, any> {
   constructor(props: any) {
@@ -49,7 +44,7 @@ class Dog extends React.Component<any, any> {
             ? this.renderLoadedState()
             : this.renderLoadingMessage()}
         </View>
-        <Footer nextDoggo={this.props.fetchDogUrl} />
+        <Footer nextDoggo={this.props.fetchDogUrl} dogUrl={this.props.dogUrl} />
       </View>
     );
   }
@@ -68,19 +63,19 @@ export default connect(mapStateToProps, { fetchDogUrl })(Dog);
 
 const styles = StyleSheet.create({
   image: {
-    height: '100%',
-    width: 300,
+    height: "100%",
+    width: 300
   },
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    minHeight: '100%',
+    minHeight: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: Platform.OS === 'ios' ? 20 : 0,
+    marginTop: Platform.OS === "ios" ? 20 : 0
   },
   mainContainer: {
     flexGrow: 1,
-    flex: 1,
+    flex: 1
   }
 });
