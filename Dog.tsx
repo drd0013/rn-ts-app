@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import {StyleSheet, Text, View, Image, Platform, Dimensions} from "react-native";
-import { fetchDogUrl } from "./actions";
+import { fetchDogUrl, fetchAvailableBreeds } from "./actions";
 import Footer from "./Footer";
 import HeaderComponent from "./Header";
 
@@ -12,6 +12,7 @@ class Dog extends React.Component<any, any> {
 
   componentDidMount() {
     this.props.fetchDogUrl();
+    this.props.fetchAvailableBreeds();
   }
 
   renderLoadingMessage() {
@@ -40,7 +41,7 @@ class Dog extends React.Component<any, any> {
   render() {
     return (
       <View style={styles.container}>
-        <HeaderComponent />
+        <HeaderComponent breeds={this.props.availableBreeds} selectedBreed={this.props.selectedBreed}/>
         <View style={styles.mainContainer}>
           {this.props.dogError || this.props.dogUrl
             ? this.renderLoadedState()
@@ -55,11 +56,16 @@ class Dog extends React.Component<any, any> {
 const mapStateToProps = (state: any) => {
   return {
     dogUrl: state.dogUrl,
-    dogError: state.requestError
+    dogError: state.requestError,
+    availableBreeds: state.availableBreeds,
+    selectedBreed: state.selectedBreed
   };
 };
 
-export default connect(mapStateToProps, { fetchDogUrl })(Dog);
+export default connect(mapStateToProps, {
+  fetchAvailableBreeds,
+  fetchDogUrl
+})(Dog);
 
 //Connect state to props
 

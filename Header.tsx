@@ -1,49 +1,48 @@
 import React from "react";
-import {StyleSheet, View, Picker, Text} from "react-native";
+import { StyleSheet, View, Picker, Text } from "react-native";
 
 var options = [
-  'Pitty',
-  'Bully',
-  'Nicey',
-  'Meaney',
-  'All',
-  'long name mc longey'
-]
+  "Pitty",
+  "Bully",
+  "Nicey",
+  "Meaney",
+  "All",
+  "long name mc longey"
+];
 
 class HeaderComponent extends React.Component<any, any> {
   constructor(props: any) {
-    super(props)
-    this.state = {
-      selectedBreed: 'all'
-    }
+    super(props);
   }
 
   handleValueChange = (newBreed: any) => {
-    this.setState({selectedBreed: newBreed})
+    console.log('new breed', newBreed)
+  };
+
+  get availableOptions() {
+    return this.props.breeds.length > 0 ? this.props.breeds : options
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>
-          Selected Breed:
-        </Text>
+        <Text>Selected Breed:</Text>
         <Picker
-          selectedValue={this.state.selectedBreed}
+          selectedValue={this.props.selectedBreed}
           mode={"dropdown"}
           onValueChange={this.handleValueChange}
           style={styles.picker}
         >
-          {options.map((option, index) => {
-            return (<Picker.Item label={option} value={option} key={index}/>)
+          {this.availableOptions.map((option: any, index) => {
+            return <Picker.Item label={option} value={option} key={index} />;
           })}
         </Picker>
       </View>
-    )
+    );
   }
-};
+}
 
-export default HeaderComponent
+export default HeaderComponent;
 
 const styles = StyleSheet.create({
   container: {
@@ -52,10 +51,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     flexShrink: 0,
-    flexDirection: "row",
+    flexDirection: "row"
   },
   picker: {
     height: 36,
-    width: 240,
+    width: 240
   }
 });
