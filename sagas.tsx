@@ -1,9 +1,9 @@
-import { takeLatest, put, yield, fork, select } from "redux-saga/effects";
+import { takeLatest, put, fork, select } from "redux-saga/effects";
 
 const getSelectedBreed = (state: any) => state.selectedBreed
 
 
-function* fetchDog(action) {
+function* fetchDog(action: any) {
   let url, selectedBreed;
   if (action.payload) {
     selectedBreed = action.payload
